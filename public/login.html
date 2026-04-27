@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NZ Address Finder</title>
+    <script src="https://tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+    <div class="container">
+        <div class="page-header">
+            <h1>NZ Address Finder</h1>
+            <p class="subtitle">Find locations with ease</p>
+        </div>
+        <h2>Login</h2>
+        <p id="error-msg" style="color: #dc3545; display: none;">Invalid username or password</p>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="handleLogin()">Login</button>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

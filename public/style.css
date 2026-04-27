@@ -1,0 +1,288 @@
+/* General Page Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+/* Helper for Login Page Centering */
+.auth-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Shared Card Container */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-top: 4px solid #667eea;
+    width: 100%;
+    max-width: 400px; /* Fits search and login perfectly */
+    margin: 20px auto;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Page Header for Login */
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.page-header h1 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.page-header .subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: #888;
+    font-weight: 500;
+}
+
+/* Form Elements */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: border 0.2s, ring 0.2s;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Search input specific styling */
+input#query {
+    padding-right: 45px;
+    border: 1px solid #dadce0;
+    border-radius: 24px;
+    font-size: 16px;
+    padding: 12px 45px 12px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+input#query:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Logout / Red Button */
+.btn-danger {
+    background: #dc3545;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+/* Navbar Button (Specific size) */
+nav button {
+    width: auto;
+    padding: 8px 16px;
+}
+
+/* Navigation Brand */
+.nav-brand {
+    flex: 1;
+}
+
+/* Search Results Dropdown */
+.results-dropdown {
+    position: absolute;
+    top: 100%; /* Positions it directly below the input */
+    left: 0;
+    right: 0;
+    width: 100%; /* Ensures it matches the width of the input field */
+    max-height: 400px; /* Limit height and add scroll */
+    overflow-y: auto;
+    z-index: 1000; /* High number to force it above all other elements */
+    background: white;
+    border: 1px solid #dadce0;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+.results-dropdown li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.results-dropdown li:hover {
+    background-color: #f0f7ff;
+    color: #007bff;
+}
+
+.results-dropdown li:last-child {
+    border-bottom: none;
+}
+
+/* Google Maps-style result item */
+.result-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid #e8e8e8 !important;
+    cursor: pointer;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    transition: background-color 0.15s ease;
+}
+
+.result-item:hover {
+    background: linear-gradient(120deg, rgba(102, 126, 234, 0.08), rgba(118, 75, 162, 0.08)) !important;
+    border-left: 3px solid #667eea;
+    padding-left: 13px !important;
+}
+
+.result-item:last-child {
+    border-bottom: none !important;
+}
+
+.result-icon {
+    font-size: 20px;
+    margin-right: 12px;
+    color: #5f6368;
+    min-width: 24px;
+    text-align: center;
+}
+
+.result-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.result-main {
+    font-size: 14px;
+    color: #202124;
+    font-weight: 500;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+}
+
+/* Error Messages & Info */
+#error-msg {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Container for the search input to allow absolute positioning of icons */
+.search-container {
+    position: relative; /* This must stay relative so the dropdown attaches to it */
+    width: 100%;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Loader Animation */
+#loader {
+    position: absolute;
+    right: 50px; /* Positioned to the left of the clear button */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff; /* Matches your blue theme */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Adjust the input padding so text doesn't hide under the icons */
+input#query {
+    padding-right: 45px; 
+}
+
+/* Clear Button - styled as an icon inside the input */
+#clear-btn {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    background: none;
+    color: #999;
+    border: none;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#clear-btn:hover {
+    color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 50%;
+}

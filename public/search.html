@@ -1,0 +1,40 @@
+<head>
+    <meta charset="UTF-8">
+    <title>NZ Address Search</title>
+    <script src="https://tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav style="background: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <div class="nav-brand">
+            <h1 style="margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 20px;">NZ Address Finder</h1>
+        </div>
+        <button onclick="logout()" class="btn-danger">Logout</button>
+    </nav>
+
+    <div class="container">
+        <h2>Address Search</h2>
+        <div class="search-container">
+            <input type="text" id="query" onkeyup="handleSearch(this.value)" 
+                   placeholder="Start typing NZ address...">
+            
+            <!-- Loader (Styled via style.css) -->
+            <div id="loader" style="display: none;"></div>
+            
+            <!-- Clear Button (Styled via style.css) -->
+            <button id="clear-btn" onclick="clearSearch()" style="display: none;">✕</button>
+
+            <!-- Results List (Inside search-container) -->
+            <ul id="results" class="results-dropdown" style="display: none;"></ul>
+        </div>
+
+        <!-- Coordinates Display -->
+        <div id="coord-display" style="margin-top: 15px; padding: 15px; background: #eef6ff; border-radius: 6px; display: none; border: 1px solid #d1e7ff;">
+            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #0056b3;">Location Found:</p>
+            <p id="lat-long" style="margin: 5px 0 0; font-family: monospace; font-size: 13px; color: #007bff;"></p>
+        </div>
+    </div>
+
+    <script src="search.js"></script>
+</body>
