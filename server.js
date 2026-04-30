@@ -9,19 +9,24 @@ app.use(express.json());
 app.use(express.static('public'));
 
 /**
- * FIXED: Fetch GPS coordinates (Place Details New)
- * URL must be ://googleapis.com{placeId}
- * FieldMask must include 'location' to get Lat/Long
+ * Fetch GPS coordinates (Place Details New)
+ * Includes status pass-through and API Key override for testing
  */
 app.post('/api/details', async (req, res) => {
     try {
         const { placeId, sessionToken } = req.body;
+
+        if (!placeId) return res.status(400).json({ error: "placeId is required" });
+
+        // Logic: Use header key if provided (for invalid key tests), else use .env
+        const apiKey = req.headers['x-test-api-key'] || process.env.GOOGLE_PLACES_API_KEY;
+
         const response = await axios.get(
             `https://places.googleapis.com/v1/places/${placeId}`, 
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Goog-Api-Key': process.env.GOOGLE_PLACES_API_KEY,
+                    'X-Goog-Api-Key': apiKey,
                     'X-Goog-FieldMask': 'id,location,displayName,formattedAddress' 
                 },
                 params: { sessionToken } 
@@ -29,19 +34,29 @@ app.post('/api/details', async (req, res) => {
         );
         res.json(response.data);
     } catch (error) {
-        console.error("Details API Error:", error.response?.data || error.message);
-        res.status(500).send("Details API Error");
+        const status = error.response?.status || 500;
+        const message = error.response?.data?.error?.message || "Details API Error";
+        
+        console.error(`Details API Error (${status}):`, message);
+        res.status(status).json({ error: message });
     }
 });
 
 /**
- * FIXED: Search route (Autocomplete New)
- * URL must be ://googleapis.com
- * FieldMask must be 'suggestions'
+ * Search route (Autocomplete New)
+ * Includes status pass-through and API Key override for testing
  */
 app.post('/api/search', async (req, res) => {
     try {
         const { input, sessionToken } = req.body;
+
+        if (!input || input.length < 3) {
+            return res.status(400).json({ error: "Search input must be at least 3 characters" });
+        }
+
+        // Logic: Use header key if provided (for invalid key tests), else use .env
+        const apiKey = req.headers['x-test-api-key'] || process.env.GOOGLE_PLACES_API_KEY;
+
         const response = await axios.post(
             'https://places.googleapis.com/v1/places:autocomplete',
             {
@@ -50,7 +65,7 @@ app.post('/api/search', async (req, res) => {
                 includedRegionCodes: ["nz"],
                 locationBias: {
                     circle: {
-                        center: { latitude: -36.8485, longitude: 174.7633 }, // Auckland Bias
+                        center: { latitude: -36.8485, longitude: 174.7633 },
                         radius: 50000.0
                     }
                 }
@@ -58,18 +73,19 @@ app.post('/api/search', async (req, res) => {
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Goog-Api-Key': process.env.GOOGLE_PLACES_API_KEY,
+                    'X-Goog-Api-Key': apiKey,
                     'X-Goog-FieldMask': 'suggestions'
                 }
             }
         );
-       // Return suggestions to frontend
         res.json(response.data.suggestions || []);
         
     } catch (error) {
-        // Log the actual error from Google for debugging
-        console.error("Autocomplete API Error:", error.response?.data || error.message);
-        res.status(500).send("Autocomplete API Error");
+        const status = error.response?.status || 500;
+        const message = error.response?.data?.error?.message || "Autocomplete API Error";
+        
+        console.error(`Autocomplete API Error (${status}):`, message);
+        res.status(status).json({ error: message });
     }
 });
 
